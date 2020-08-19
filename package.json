@@ -30,5 +30,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Conway's Game of Life",
+  "main": "index.js",
+  "repository": "https://github.com/jimmique-parsons/game-of-life.git",
+  "author": "Jimmique Parsons <jimmique.parsons@gmail.com>",
+  "license": "MIT"
 }
