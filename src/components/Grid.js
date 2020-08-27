@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Cell from "./Cell.js";
-import { getLiveCells, getGridOffset, generateNext } from "../helpers.js";
+import { getLiveCells, getGridOffset } from "../helpers.js";
 import GridContext from "../contexts/gridContext.js";
 import SizeContext from "../contexts/sizeContext.js";
 import CellContext from "../contexts/cellContext.js";
@@ -28,6 +28,8 @@ function Grid({ rows, cols }, ref) {
     // Get the x and y indexes of the cell that was clicked
     const x = Math.floor(offsetX / cellSize);
     const y = Math.floor(offsetY / cellSize);
+
+    console.log(`x: ${x} y: ${y}`);
 
     // If x and y are within bounds of the grid, toggle the state of that cell
     if (x >= 0 && x <= cols && y >= 0 && y <= rows) {
@@ -65,5 +67,4 @@ function Grid({ rows, cols }, ref) {
 }
 
 const forwardedGrid = React.forwardRef(Grid);
-
 export default forwardedGrid;

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { makeEmptyGrid, makeRandomGrid, getNeighborCount } from "../helpers.js";
+import { makeEmptyGrid, makeRandomGrid, getNeighborCount, makePresetGrid } from "../helpers.js";
 import GridContext from "../contexts/gridContext.js";
 import CellContext from "../contexts/cellContext.js";
 import { getLiveCells } from "../helpers.js";
@@ -9,6 +9,8 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
   const { setLiveCells } = useContext(CellContext);
   const [timeoutId, setTimeoutId] = useState(null);
   const [ preset, setPreset ] = useState("none");
+  const [ interval, setInterval ] = useState(500);
+  const [ speed, setSpeed ] = useState(5);
 
   const start = () => {
     setIsRunning(true);
@@ -31,6 +33,7 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
     setGrid(emptyGrid);
     setLiveCells(getLiveCells(rows, cols, emptyGrid));
     setGeneration(0);
+    setPreset("none");
   };
 
   const random = () => {
@@ -40,8 +43,37 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
   };
 
   const changePreset = (e) => {
-    setPreset(e.target.value);
+    const preset = e.target.value
+    setPreset(preset);
+
+    switch(preset){
+      case "glider":
+        const gliderGrid = makePresetGrid(rows, cols, "glider");
+        setGrid(gliderGrid);
+        setLiveCells(getLiveCells(rows, cols, gliderGrid));
+        break;
+      case "exploder":
+        const exploderGrid = makePresetGrid(rows, cols, "exploder");
+        setGrid(exploderGrid);
+        setLiveCells(getLiveCells(rows, cols, exploderGrid));
+        break;
+      case "tumbler":
+        const tumblerGrid = makePresetGrid(rows, cols, "tumbler");
+        setGrid(tumblerGrid);
+        setLiveCells(getLiveCells(rows, cols, tumblerGrid));
+        break;
+      case "none":
+        setGrid(makeEmptyGrid());
+        break;
+      default:
+        setGrid(makeEmptyGrid());
+    }
   };
+
+  const changeInterval = (e) => {
+    setSpeed(e.target.value);
+    setInterval(2000/e.target.value);
+  }
 
   const makeGenerationOnce = (grid, cols, rows) => {
     const newGrid = makeEmptyGrid(rows, cols);
@@ -95,7 +127,7 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
 
     const id = setTimeout(() => {
       makeNewGenerations(newGrid, cols, rows);
-    }, 1000);
+    }, interval);
 
     setTimeoutId(id);
   };
@@ -115,7 +147,10 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
         <select disabled={isRunning ? true : false} onChange={changePreset} value={preset}>
           <option value="none">Select a Sample Configuration</option>
           <option value="glider">Glider</option>
+          <option value="exploder">Exploder</option>
+          <option value="tumbler">Tumbler</option>
         </select>
+        <input disabled={isRunning ? true : false} type="range" min="1" max="30" value={speed} onChange={changeInterval}/>
       </div>
     </section>
   );
