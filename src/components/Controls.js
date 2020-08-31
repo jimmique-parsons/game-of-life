@@ -9,7 +9,14 @@ import GridContext from "../contexts/gridContext.js";
 import CellContext from "../contexts/cellContext.js";
 import { getLiveCells } from "../helpers.js";
 
-function Controls({ isRunning, setIsRunning, rows, cols, setGeneration, midPoint }) {
+function Controls({
+  isRunning,
+  setIsRunning,
+  rows,
+  cols,
+  setGeneration,
+  midPoint,
+}) {
   const { grid, setGrid } = useContext(GridContext);
   const { setLiveCells } = useContext(CellContext);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -46,6 +53,7 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration, midPoint
     const randomGrid = makeRandomGrid(rows, cols);
     setGrid(randomGrid);
     setLiveCells(getLiveCells(rows, cols, randomGrid));
+    setPreset("none");
   };
 
   const changePreset = (e) => {
@@ -141,7 +149,7 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration, midPoint
 
   return (
     <section>
-      <div>
+      <div className="btn-container">
         {isRunning ? (
           <button onClick={stop}>Stop</button>
         ) : (
@@ -156,27 +164,30 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration, midPoint
         <button disabled={isRunning ? true : false} onClick={random}>
           Random
         </button>
-        <select
+      </div>
+      <select
+        disabled={isRunning ? true : false}
+        onChange={changePreset}
+        value={preset}
+      >
+        <option value="none">Select a Preset </option>
+        <option value="glider">Glider</option>
+        <option value="exploder">Exploder</option>
+        <option value="tumbler">Tumbler</option>
+      </select>
+
+      <div className="speed-control">
+        <span>
+          <strong>Speed:</strong>
+        </span>
+        <input
           disabled={isRunning ? true : false}
-          onChange={changePreset}
-          value={preset}
-        >
-          <option value="none">Select a Preset</option>
-          <option value="glider">Glider</option>
-          <option value="exploder">Exploder</option>
-          <option value="tumbler">Tumbler</option>
-        </select>
-        <div className="speed-control">
-          <span>Speed:</span>
-          <input
-            disabled={isRunning ? true : false}
-            type="range"
-            min="1"
-            max="30"
-            value={speed}
-            onChange={changeInterval}
-          />
-        </div>
+          type="range"
+          min="1"
+          max="30"
+          value={speed}
+          onChange={changeInterval}
+        />
       </div>
     </section>
   );
