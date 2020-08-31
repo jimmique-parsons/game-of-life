@@ -3,7 +3,7 @@ import React from "react";
 
 function About() {
   return (
-    <section>
+    <section className="about">
       <h3>About</h3>
       <p>
         <strong>Cellular automata</strong> is a program that operates on data that is normally

@@ -1,16 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rubik:wght@300&display=swap");
+
 .App {
   text-align: center;
+  padding: 2% 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 1.6rem;
+  color: #120052;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Press Start 2P", cursive;
+}
+
+h1 {
+  margin-bottom: 5%;
+  font-size: 4.2rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+p {
+  line-height: 1.4;
+  text-align: justify;
+  font-size: 1.6rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.about,
+.rules {
+  width: 40%;
+  margin: 0 auto 3%;
+  font-size: 1.6rem;
+}
+
+.rules h2 {
+  text-align: left;
+}
+.about h2 {
+  text-align: left;
+}
+.rules {
+  padding: 0;
+}
+
+.rules ol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  margin-left: -20px;
+  
+}
+
+.rules li {
+  margin-bottom: 15px;
+}
+
+ol {
+  counter-reset: item;
+  margin: 0 0 1.5em;
+  padding: 0;
+}
+ol li {
+  counter-increment: item;
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 0 2rem;
+  text-indent: -0.6rem;
+}
+ol li::before {
+  content: counter(item) '.';
+  display: inline-block;
+  font-weight: bold;
 }
 
 .grid {
   position: relative;
   margin: 0 auto;
-  background-color: #bed4ff;
+  background-color: #8d85fa;
   background-image: linear-gradient(#fff 1px, transparent 1px),
     linear-gradient(90deg, #fff 1px, transparent 1px);
 }
 
 .cell {
-  background: #23f0c7;
+  background: #ffbb00;
   position: absolute;
+}
+
+.generation {
+  margin: 20px auto;
+  font-weight: 600;
+}
+
+.controls-speed {
+  margin: 15px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 190px;
+  font-size: 1.4rem;
 }
