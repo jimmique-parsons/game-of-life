@@ -9,7 +9,7 @@ import GridContext from "../contexts/gridContext.js";
 import CellContext from "../contexts/cellContext.js";
 import { getLiveCells } from "../helpers.js";
 
-function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
+function Controls({ isRunning, setIsRunning, rows, cols, setGeneration, midPoint }) {
   const { grid, setGrid } = useContext(GridContext);
   const { setLiveCells } = useContext(CellContext);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -55,17 +55,17 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
 
     switch (preset) {
       case "glider":
-        const gliderGrid = makePresetGrid(rows, cols, "glider");
+        const gliderGrid = makePresetGrid(rows, cols, midPoint, "glider");
         setGrid(gliderGrid);
         setLiveCells(getLiveCells(rows, cols, gliderGrid));
         break;
       case "exploder":
-        const exploderGrid = makePresetGrid(rows, cols, "exploder");
+        const exploderGrid = makePresetGrid(rows, cols, midPoint, "exploder");
         setGrid(exploderGrid);
         setLiveCells(getLiveCells(rows, cols, exploderGrid));
         break;
       case "tumbler":
-        const tumblerGrid = makePresetGrid(rows, cols, "tumbler");
+        const tumblerGrid = makePresetGrid(rows, cols, midPoint, "tumbler");
         setGrid(tumblerGrid);
         setLiveCells(getLiveCells(rows, cols, tumblerGrid));
         break;
@@ -161,12 +161,12 @@ function Controls({ isRunning, setIsRunning, rows, cols, setGeneration }) {
           onChange={changePreset}
           value={preset}
         >
-          <option value="none">Select a Sample Configuration</option>
+          <option value="none">Select a Preset</option>
           <option value="glider">Glider</option>
           <option value="exploder">Exploder</option>
           <option value="tumbler">Tumbler</option>
         </select>
-        <div className="controls-speed">
+        <div className="speed-control">
           <span>Speed:</span>
           <input
             disabled={isRunning ? true : false}
