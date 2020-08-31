@@ -16,28 +16,28 @@ function Grid({ rows, cols, isRunning }, ref) {
     if (isRunning) return;
 
     const gridOffset = getGridOffset(ref);
-    // MouseEvent.clientX/Y returns
-    // The horizontal and vertical coordinates within the App component
-    // where the mouse was clicked
+    /* MouseEvent.clientX/Y returns
+     The horizontal and vertical coordinates within the App component
+     where the mouse was clicked
 
-    // How many pixels from the left of the Grid the mouse click event occured
+     How many pixels from the left of the Grid the mouse click event occured */
     const offsetX = e.clientX - gridOffset.x;
 
-    // How many pixels from the top of the Grid the mouse click event occured
+    /* How many pixels from the top of the Grid the mouse click event occured */
     const offsetY = e.clientY - gridOffset.y;
 
-    // Get the x and y indexes of the cell that was clicked
+    /* Get the x and y indexes of the cell that was clicked */
     const x = Math.floor(offsetX / cellSize);
     const y = Math.floor(offsetY / cellSize);
 
     console.log(`x: ${x} y: ${y}`);
 
-    // If x and y are within bounds of the grid, toggle the state of that cell
+    /* If x and y are within bounds of the grid, toggle the state of that cell */
     if (x >= 0 && x <= cols && y >= 0 && y <= rows) {
       setGrid([...grid, (grid[y][x] = !grid[y][x])]);
     }
 
-    // Update the state of the cells based on the updated grid
+    /* Update the state of the cells based on the updated grid */
     setLiveCells(getLiveCells(rows, cols, grid));
   };
 

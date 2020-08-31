@@ -2,8 +2,8 @@ import React from "react";
 
 function Cell({ x, y, cellSize }) {
   return (
-    // div.cell has a position of absolute
-    // +1 and -1 pixel adjusts are for aligning the cells within the grid borders
+    /* div.cell has a position of absolute
+    +1 and -1 pixel adjusts are for aligning the cells within the grid borders */
 
     <div
       className="cell"
