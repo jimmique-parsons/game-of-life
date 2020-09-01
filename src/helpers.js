@@ -26,10 +26,10 @@ export const getGridOffset = (gridRef) => {
   // y: == to this.top
   const rect = gridRef.current.getBoundingClientRect();
 
+  // Below X will return the Grid's distance from the left of the viewport
+  // Below Y will return the Grid's distance from the top of the viewport
   return {
-    // Grid's distance from the left of the viewport
     x: rect.left,
-    // Grid's distance from the top of the viewport
     y: rect.top,
   };
 };

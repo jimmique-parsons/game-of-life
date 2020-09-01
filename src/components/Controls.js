@@ -19,7 +19,7 @@ function Controls({
 }) {
   const { grid, setGrid } = useContext(GridContext);
   const { setLiveCells } = useContext(CellContext);
-  const [timeoutId, setTimeoutId] = useState(undefined);
+  const [timeoutId, setTimeoutId] = useState(null);
   const [preset, setPreset] = useState("none");
   const [interval, setInterval] = useState(500);
   const [speed, setSpeed] = useState(5);
